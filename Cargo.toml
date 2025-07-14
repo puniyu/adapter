@@ -1,0 +1,20 @@
+[workspace]
+members = [
+    "puniyu_adapter_console"
+]
+resolver = "2"
+
+[workspace.package]
+authors = ["wuliya <3369906077@qq.com>"]
+license = "LGPL-3.0-only"
+readme = "README.md"
+homepage = "https://github.com/puniyu/adapter"
+repository = "https://github.com/puniyu/adapter"
+edition = "2024"
+rust-version = "1.88.0"
+
+[workspace.dependencies]
+async-trait = "0.1.89"
+puniyu_core = { git = "https://github.com/puniyu/puniyu" }
+puniyu_adapter = { git = "https://github.com/puniyu/puniyu" }
+puniyu_build = { git = "https://github.com/puniyu/puniyu" }
