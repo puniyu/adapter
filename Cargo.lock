@@ -417,6 +417,7 @@ dependencies = [
  "iana-time-zone",
  "js-sys",
  "num-traits",
+ "serde",
  "wasm-bindgen",
  "windows-link 0.2.1",
 ]
@@ -449,6 +450,16 @@ dependencies = [
  "percent-encoding",
  "time",
  "version_check",
+]
+
+[[package]]
+name = "core-foundation"
+version = "0.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2a6cd9ae233e7f62ba4e9353e81a88df7fc8a5987b8d445b4d90c879bd156f6"
+dependencies = [
+ "core-foundation-sys",
+ "libc",
 ]
 
 [[package]]
@@ -672,6 +683,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "flume"
+version = "0.11.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "da0e4dd2a88388a1f4ccc7c9ce104604dab68d9f408dc34cd45823d5a9069095"
+dependencies = [
+ "futures-core",
+ "futures-sink",
+ "nanorand",
+ "spin",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -813,8 +836,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "335ff9f135e4384c8150d6f27c6daed433577f86b4750418338c01a1a2528592"
 dependencies = [
  "cfg-if",
+ "js-sys",
  "libc",
  "wasi",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -828,6 +853,27 @@ dependencies = [
  "r-efi",
  "wasip2",
 ]
+
+[[package]]
+name = "gfxinfo"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "14f33b12fba19d158bebe0262fd2b6c49fee6f0e0e089f4f3fdc11c017548473"
+dependencies = [
+ "core-foundation",
+ "io-kit-sys",
+ "libdrm_amdgpu_sys",
+ "nvml-wrapper",
+ "serde",
+ "windows 0.61.3",
+ "wmi",
+]
+
+[[package]]
+name = "glob"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0cc23270f6e1808e30a928bdc84dea0b9b4136a8bc82338574f23baf47bbd280"
 
 [[package]]
 name = "h2"
@@ -904,7 +950,7 @@ dependencies = [
  "js-sys",
  "log",
  "wasm-bindgen",
- "windows-core 0.62.2",
+ "windows-core 0.61.2",
 ]
 
 [[package]]
@@ -1075,6 +1121,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "io-kit-sys"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "617ee6cf8e3f66f3b4ea67a4058564628cde41901316e19f559e14c7c72c5e7b"
+dependencies = [
+ "core-foundation-sys",
+ "mach2",
+]
+
+[[package]]
 name = "itertools"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1148,6 +1204,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2874a2af47a2325c2001a6e6fad9b16a53b802102b528163885171cf92b15976"
 
 [[package]]
+name = "libdrm_amdgpu_sys"
+version = "0.8.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a7bf95f3c5d8a8ae4a5c0c46fe2271c16fdf8fd4b26978f44b082a0f8ebaaae"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "libloading"
 version = "0.8.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1196,6 +1261,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "34080505efa8e45a4b816c349525ebe327ceaa8559756f0356cba97ef3bf7432"
 
 [[package]]
+name = "mach2"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d640282b302c0bb0a2a8e0233ead9035e3bed871f0b7e81fe4a1ec829765db44"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "memchr"
 version = "2.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1227,6 +1301,15 @@ dependencies = [
  "log",
  "wasi",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "nanorand"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a51313c5820b0b02bd422f4b44776fbf47961755c74ce64afc73bfad10226c3"
+dependencies = [
+ "getrandom 0.2.16",
 ]
 
 [[package]]
@@ -1295,6 +1378,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "071dfc062690e90b734c0b2273ce72ad0ffa95f0c74596bc250dcfd960262841"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "nvml-wrapper"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c9bff0aa1d48904a1385ea2a8b97576fbdcbc9a3cfccd0d31fe978e1c4038c5"
+dependencies = [
+ "bitflags 2.9.4",
+ "libloading",
+ "nvml-wrapper-sys",
+ "static_assertions",
+ "thiserror 1.0.69",
+ "wrapcenum-derive",
+]
+
+[[package]]
+name = "nvml-wrapper-sys"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "698d45156f28781a4e79652b6ebe2eaa0589057d588d3aec1333f6466f13fcb5"
+dependencies = [
+ "libloading",
 ]
 
 [[package]]
@@ -1458,30 +1564,30 @@ dependencies = [
 [[package]]
 name = "puniyu_adapter"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "async-trait",
- "puniyu_adapter_builder",
- "puniyu_adapter_derive",
+ "puniyu_adapter_api",
  "puniyu_bot",
+ "puniyu_builder",
+ "puniyu_common",
+ "puniyu_contact",
  "puniyu_element",
+ "puniyu_event",
  "puniyu_event_bus",
- "puniyu_event_core",
- "puniyu_event_message",
- "puniyu_event_utils",
- "puniyu_logger 0.6.1",
- "puniyu_utils",
+ "puniyu_logger",
+ "puniyu_macros",
+ "puniyu_sender",
  "serde_json",
 ]
 
 [[package]]
-name = "puniyu_adapter_builder"
+name = "puniyu_adapter_api"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
- "async-trait",
+ "puniyu_contact",
  "puniyu_element",
- "puniyu_event_utils",
  "serde",
  "strum",
 ]
@@ -1497,83 +1603,94 @@ dependencies = [
 ]
 
 [[package]]
-name = "puniyu_adapter_derive"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.106",
-]
-
-[[package]]
-name = "puniyu_adapter_registry"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "futures",
- "puniyu_adapter_builder",
- "puniyu_event_bus",
- "puniyu_library",
- "puniyu_logger 0.6.1",
- "puniyu_utils",
- "thiserror 2.0.17",
-]
-
-[[package]]
 name = "puniyu_bot"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
- "puniyu_adapter_builder",
- "puniyu_logger 0.6.1",
+ "puniyu_builder",
+ "puniyu_logger",
 ]
 
 [[package]]
 name = "puniyu_build"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 
 [[package]]
-name = "puniyu_command_builder"
+name = "puniyu_builder"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "async-trait",
- "puniyu_event_context",
+ "puniyu_adapter_api",
+ "puniyu_command",
+ "puniyu_element",
+ "serde",
+ "strum",
 ]
 
 [[package]]
-name = "puniyu_command_registry"
+name = "puniyu_command"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
+ "async-trait",
  "itertools",
- "puniyu_command_builder",
+ "puniyu_event",
+]
+
+[[package]]
+name = "puniyu_common"
+version = "0.1.0"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
+dependencies = [
+ "puniyu_system_info",
+ "serde",
+ "thiserror 2.0.17",
+ "toml",
+]
+
+[[package]]
+name = "puniyu_config"
+version = "0.1.0"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
+dependencies = [
+ "flume",
+ "notify",
+ "puniyu_common",
+ "puniyu_logger",
+ "serde",
+]
+
+[[package]]
+name = "puniyu_contact"
+version = "0.1.0"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
+dependencies = [
+ "serde",
+ "strum",
 ]
 
 [[package]]
 name = "puniyu_core"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "async-trait",
  "convert_case",
  "figlet-rs",
+ "glob",
  "inventory",
- "notify",
- "puniyu_adapter_builder",
- "puniyu_adapter_registry",
  "puniyu_bot",
  "puniyu_build",
+ "puniyu_builder",
+ "puniyu_common",
+ "puniyu_config",
  "puniyu_event_bus",
- "puniyu_logger 0.6.1",
- "puniyu_plugin_builder",
- "puniyu_plugin_registry",
+ "puniyu_logger",
+ "puniyu_registry",
  "puniyu_server",
- "puniyu_task_registry",
- "puniyu_utils",
- "serde",
+ "puniyu_task",
  "thiserror 2.0.17",
  "tokio",
 ]
@@ -1581,7 +1698,7 @@ dependencies = [
 [[package]]
 name = "puniyu_element"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "serde",
  "serde_json",
@@ -1589,110 +1706,47 @@ dependencies = [
 ]
 
 [[package]]
+name = "puniyu_event"
+version = "0.1.0"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
+dependencies = [
+ "puniyu_adapter_api",
+ "puniyu_contact",
+ "puniyu_element",
+ "puniyu_sender",
+ "strum",
+]
+
+[[package]]
 name = "puniyu_event_bus"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
- "puniyu_event_core",
- "puniyu_event_handler",
- "puniyu_event_matcher",
- "puniyu_logger 0.6.1",
+ "puniyu_event",
+ "puniyu_handler",
+ "puniyu_logger",
+ "puniyu_matcher",
  "strum",
  "tokio",
 ]
 
 [[package]]
-name = "puniyu_event_context"
+name = "puniyu_handler"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "puniyu_adapter_builder",
- "puniyu_element",
- "puniyu_event_message",
- "puniyu_event_utils",
-]
-
-[[package]]
-name = "puniyu_event_core"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "puniyu_adapter_builder",
- "puniyu_event_message",
-]
-
-[[package]]
-name = "puniyu_event_handler"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "async-trait",
- "puniyu_command_builder",
- "puniyu_command_registry",
- "puniyu_event_context",
- "puniyu_event_core",
- "puniyu_event_message",
-]
-
-[[package]]
-name = "puniyu_event_matcher"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "itertools",
- "puniyu_command_registry",
- "puniyu_element",
- "puniyu_event_core",
- "puniyu_event_message",
- "puniyu_event_utils",
- "puniyu_logger 0.6.1",
-]
-
-[[package]]
-name = "puniyu_event_message"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "puniyu_adapter_builder",
- "puniyu_element",
- "puniyu_event_utils",
- "strum",
-]
-
-[[package]]
-name = "puniyu_event_utils"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "serde",
- "strum",
+ "puniyu_command",
+ "puniyu_event",
 ]
 
 [[package]]
 name = "puniyu_library"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "libloading",
  "thiserror 2.0.17",
-]
-
-[[package]]
-name = "puniyu_logger"
-version = "0.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b58f7ca07f8cfdcf1a76b290fd321cfa52c58932538a53d67ab70f0be5dfaa9"
-dependencies = [
- "chrono",
- "chrono-tz",
- "convert_case",
- "owo-colors",
- "strip-ansi-escapes",
- "tracing",
- "tracing-appender",
- "tracing-log",
- "tracing-shared",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -1714,82 +1768,87 @@ dependencies = [
 ]
 
 [[package]]
-name = "puniyu_plugin_builder"
+name = "puniyu_macros"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
- "async-trait",
- "puniyu_command_builder",
- "puniyu_task_builder",
+ "convert_case",
+ "croner",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.106",
 ]
 
 [[package]]
-name = "puniyu_plugin_registry"
+name = "puniyu_matcher"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
+dependencies = [
+ "puniyu_element",
+ "puniyu_event",
+ "puniyu_logger",
+]
+
+[[package]]
+name = "puniyu_registry"
+version = "0.1.0"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "futures",
- "puniyu_command_builder",
- "puniyu_command_registry",
+ "puniyu_bot",
+ "puniyu_builder",
+ "puniyu_command",
+ "puniyu_common",
+ "puniyu_config",
+ "puniyu_event_bus",
  "puniyu_library",
- "puniyu_logger 0.6.1",
- "puniyu_plugin_builder",
- "puniyu_task_registry",
- "puniyu_utils",
+ "puniyu_logger",
+ "puniyu_task",
  "thiserror 2.0.17",
+]
+
+[[package]]
+name = "puniyu_sender"
+version = "0.1.0"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
+dependencies = [
+ "serde",
+ "strum",
 ]
 
 [[package]]
 name = "puniyu_server"
 version = "0.1.0"
-source = "git+https://github.com/Puniyu/server#4decd5cca6af3da5e44bf5e704f6d0e4ae75cecd"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "actix-web",
  "futures-util",
- "puniyu_logger 0.5.6",
+ "puniyu_logger",
  "tokio",
 ]
 
 [[package]]
 name = "puniyu_system_info"
-version = "0.5.8"
+version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f105a756ac0e85fd630597165ebb3bfe2461cd91b038491a3d4d122b2b0657c4"
+checksum = "eb9323d804fbb775a4ed37adb9043ae3652660c0bad9448d908625073f6e2bd9"
 dependencies = [
+ "gfxinfo",
  "rust_decimal",
  "sysinfo",
 ]
 
 [[package]]
-name = "puniyu_task_builder"
+name = "puniyu_task"
 version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "async-trait",
-]
-
-[[package]]
-name = "puniyu_task_registry"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
+source = "git+https://github.com/puniyu/puniyu#b0b45e7bc68573dc5404eb200565fab00730187b"
 dependencies = [
  "chrono-tz",
- "puniyu_logger 0.6.1",
- "puniyu_task_builder",
+ "puniyu_builder",
+ "puniyu_logger",
  "tokio",
  "tokio-cron-scheduler",
  "uuid",
-]
-
-[[package]]
-name = "puniyu_utils"
-version = "0.1.0"
-source = "git+https://github.com/puniyu/puniyu#ecc5685ae84ae0246bbdd77aac44e6795df8835a"
-dependencies = [
- "puniyu_system_info",
- "serde",
- "thiserror 2.0.17",
- "toml",
 ]
 
 [[package]]
@@ -2153,10 +2212,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "spin"
+version = "0.9.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6980e8d7511241f8acf4aebddbb1ff938df5eebe98691418c4468d0b72a96a67"
+dependencies = [
+ "lock_api",
+]
+
+[[package]]
 name = "stable_deref_trait"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
+
+[[package]]
+name = "static_assertions"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "strip-ansi-escapes"
@@ -2238,7 +2312,7 @@ dependencies = [
  "ntapi",
  "objc2-core-foundation",
  "objc2-io-kit",
- "windows",
+ "windows 0.61.3",
 ]
 
 [[package]]
@@ -2732,15 +2806,37 @@ checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
 
 [[package]]
 name = "windows"
+version = "0.60.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ddf874e74c7a99773e62b1c671427abf01a425e77c3d3fb9fb1e4883ea934529"
+dependencies = [
+ "windows-collections 0.1.1",
+ "windows-core 0.60.1",
+ "windows-future 0.1.1",
+ "windows-link 0.1.3",
+ "windows-numerics 0.1.1",
+]
+
+[[package]]
+name = "windows"
 version = "0.61.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9babd3a767a4c1aef6900409f85f5d53ce2544ccdfaa86dad48c91782c6d6893"
 dependencies = [
- "windows-collections",
+ "windows-collections 0.2.0",
  "windows-core 0.61.2",
- "windows-future",
+ "windows-future 0.2.1",
  "windows-link 0.1.3",
- "windows-numerics",
+ "windows-numerics 0.2.0",
+]
+
+[[package]]
+name = "windows-collections"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5467f79cc1ba3f52ebb2ed41dbb459b8e7db636cc3429458d9a852e15bc24dec"
+dependencies = [
+ "windows-core 0.60.1",
 ]
 
 [[package]]
@@ -2754,28 +2850,38 @@ dependencies = [
 
 [[package]]
 name = "windows-core"
-version = "0.61.2"
+version = "0.60.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c0fdd3ddb90610c7638aa2b3a3ab2904fb9e5cdbecc643ddb3647212781c4ae3"
+checksum = "ca21a92a9cae9bf4ccae5cf8368dce0837100ddf6e6d57936749e85f152f6247"
 dependencies = [
- "windows-implement",
+ "windows-implement 0.59.0",
  "windows-interface",
  "windows-link 0.1.3",
- "windows-result 0.3.4",
- "windows-strings 0.4.2",
+ "windows-result",
+ "windows-strings 0.3.1",
 ]
 
 [[package]]
 name = "windows-core"
-version = "0.62.2"
+version = "0.61.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b8e83a14d34d0623b51dce9581199302a221863196a1dde71a7663a4c2be9deb"
+checksum = "c0fdd3ddb90610c7638aa2b3a3ab2904fb9e5cdbecc643ddb3647212781c4ae3"
 dependencies = [
- "windows-implement",
+ "windows-implement 0.60.2",
  "windows-interface",
- "windows-link 0.2.1",
- "windows-result 0.4.1",
- "windows-strings 0.5.1",
+ "windows-link 0.1.3",
+ "windows-result",
+ "windows-strings 0.4.2",
+]
+
+[[package]]
+name = "windows-future"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a787db4595e7eb80239b74ce8babfb1363d8e343ab072f2ffe901400c03349f0"
+dependencies = [
+ "windows-core 0.60.1",
+ "windows-link 0.1.3",
 ]
 
 [[package]]
@@ -2787,6 +2893,17 @@ dependencies = [
  "windows-core 0.61.2",
  "windows-link 0.1.3",
  "windows-threading",
+]
+
+[[package]]
+name = "windows-implement"
+version = "0.59.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "83577b051e2f49a058c308f17f273b570a6a758386fc291b5f6a934dd84e48c1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.106",
 ]
 
 [[package]]
@@ -2825,6 +2942,16 @@ checksum = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
 
 [[package]]
 name = "windows-numerics"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "005dea54e2f6499f2cee279b8f703b3cf3b5734a2d8d21867c8f44003182eeed"
+dependencies = [
+ "windows-core 0.60.1",
+ "windows-link 0.1.3",
+]
+
+[[package]]
+name = "windows-numerics"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9150af68066c4c5c07ddc0ce30421554771e528bde427614c61038bc2c92c2b1"
@@ -2843,12 +2970,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "windows-result"
-version = "0.4.1"
+name = "windows-strings"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7781fa89eaf60850ac3d2da7af8e5242a5ea78d1a11c49bf2910bb5a73853eb5"
+checksum = "87fa48cc5d406560701792be122a10132491cff9d0aeb23583cc2dcafc847319"
 dependencies = [
- "windows-link 0.2.1",
+ "windows-link 0.1.3",
 ]
 
 [[package]]
@@ -2858,15 +2985,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "56e6c93f3a0c3b36176cb1327a4958a0353d5d166c2a35cb268ace15e91d3b57"
 dependencies = [
  "windows-link 0.1.3",
-]
-
-[[package]]
-name = "windows-strings"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7837d08f69c77cf6b07689544538e017c1bfcf57e34b4c0ff58e6c2cd3b37091"
-dependencies = [
- "windows-link 0.2.1",
 ]
 
 [[package]]
@@ -3048,6 +3166,33 @@ name = "wit-bindgen"
 version = "0.46.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f17a85883d4e6d00e8a97c586de764dabcc06133f7f1d55dce5cdc070ad7fe59"
+
+[[package]]
+name = "wmi"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2f902b4592b911109e7352bcfec7b754b07ec71e514d7dfa280eaef924c1cb08"
+dependencies = [
+ "chrono",
+ "futures",
+ "log",
+ "serde",
+ "thiserror 2.0.17",
+ "windows 0.60.0",
+ "windows-core 0.60.1",
+]
+
+[[package]]
+name = "wrapcenum-derive"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a76ff259533532054cfbaefb115c613203c73707017459206380f03b3b3f266e"
+dependencies = [
+ "darling",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.106",
+]
 
 [[package]]
 name = "writeable"

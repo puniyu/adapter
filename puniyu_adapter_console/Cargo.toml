@@ -16,3 +16,8 @@ async-trait.workspace = true
 
 [build-dependencies]
 puniyu_build.workspace = true
+
+
+[features]
+default = []
+cdylib = []
